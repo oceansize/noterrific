@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, .main-container, .editor {
+  height: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 1.5em;
+}
+
+header, .note-list, .note-title, .note-body {
+  padding: 1em;
+}
+
+header {
+  background-color: teal;
+  color: white;
+}
+
+.logo {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.note-list {
+  width: 33.3%;
+  height: 100%;
+  background-color: salmon;
+  float: left;
+}
+
+.editor {
+  background-color: goldenrod;
+  width: 66.7%;
+  float: left;
+}
+
+.note-list li {
+  margin: 3px 0px; 
+  padding-top: .5em;
+  padding-bottom: .5em;
+  border-bottom: 1px solid black;
+}
+
+.note-list li:last-child {
+  padding-bottom: .5em;
+  border-bottom: none;
+}
+
+.search-bar {
+  float: right;
+}
+button {
+  border-radius: 0;
+  background: BurlyWood;
+  border: none;
+  width: 100%;
+  padding: 1em;
+}
+
+.tag-entry input {
+  width: 100%;
+}
+
+ul.timestamps  {
+  display: inline-block;
+}
+
+ul.timestamps li {
+  display: inline-block;
+  float: left;
+  margin-left: 1em;
+  font-size: 0.8em;
+}
+
+.note-title h2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.cf:before,
+.cf:after {
+      content: " "; /* 1 */
+          display: table; /* 2 */
+        }
+
+        .cf:after {
+              clear: both;
+            }
+
+            /**
+             *  * For IE 6/7 only
+             *   * Include this rule to trigger hasLayout and contain floats.
+             *    */
+  .cf {
+        *zoom: 1;
+      }
