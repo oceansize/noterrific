@@ -15,9 +15,23 @@
       })[0]
     };
 
+    var create = function() {
+      var newId =  maxId() + 1;
+      var note = {id: newId, title: "Untitled Note", content: "", tags: [], created_at: "", updated_at: ""}
+      notes.push(note)
+      return note
+    }
+
+    var maxId = function() {
+      return notes.reduce(function(prev, curr){
+        return Math.max(prev, curr.id);
+      }, 0)
+    }
+
     return {
       allNotes: notes,
-      find: find
+      find: find,
+      create: create
     };
   }])
 })()

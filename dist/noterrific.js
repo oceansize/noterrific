@@ -1296,29 +1296,36 @@ function ngViewFillContentFactory($compile, $controller, $route) {
         controller: "individualNoteController",
         controllerAs: "noteCtrl"
       }).
-      when("/welcome", {
-        templateUrl: "partials/welcome.html"
-      }).
       otherwise({
-        redirectTo: "/welcome"
+        redirectTo: "/notes/new",
+        templateUrl: "partials/note.html",
+        controller: "individualNoteController",
+        controllerAs: "noteCtrl"
       });
     }
   ]);
 })()
 ;(function(){
-  angular.module("noterrific").controller("individualNoteController", ["$routeParams", "notesFactory", function($routeParams, Notes){
+  angular.module("noterrific").controller("individualNoteController", ["$routeParams", "notesFactory", "$location", function($routeParams, Notes, $location){
     var self = this;
+    var noteId = $routeParams.noteId;
 
-    self.noteId = $routeParams.noteId;
-    self.note = Notes.find(self.noteId);
+    self.note = Notes.find(noteId)
+    if(!self.note) {
+      self.note = Notes.create();
+      $location.path("/notes/" + self.note.id); 
+    }
   }])
 })()
 
 ;(function(){
-  angular.module("noterrific").controller("notesController", ["notesFactory", function(Notes){
+  angular.module("noterrific").controller("notesController", ["notesFactory", "$location", function(Notes, $location){
     var self = this;
 
     self.notes = Notes.allNotes;
+    self.newNote = function() {
+      $location.path("/notes/new");
+    };
   }])
 })()
 ;(function(){
@@ -1338,9 +1345,23 @@ function ngViewFillContentFactory($compile, $controller, $route) {
       })[0]
     };
 
+    var create = function() {
+      var newId =  maxId() + 1;
+      var note = {id: newId, title: "Untitled Note", content: "", tags: [], created_at: "", updated_at: ""}
+      notes.push(note)
+      return note
+    }
+
+    var maxId = function() {
+      return notes.reduce(function(prev, curr){
+        return Math.max(prev, curr.id);
+      }, 0)
+    }
+
     return {
       allNotes: notes,
-      find: find
+      find: find,
+      create: create
     };
   }])
 })()

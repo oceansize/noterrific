@@ -6,11 +6,11 @@
         controller: "individualNoteController",
         controllerAs: "noteCtrl"
       }).
-      when("/welcome", {
-        templateUrl: "partials/welcome.html"
-      }).
       otherwise({
-        redirectTo: "/welcome"
+        redirectTo: "/notes/new",
+        templateUrl: "partials/note.html",
+        controller: "individualNoteController",
+        controllerAs: "noteCtrl"
       });
     }
   ]);
