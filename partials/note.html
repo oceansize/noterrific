@@ -1,0 +1,15 @@
+<section class="metadata">
+  <form class="tag-entry">
+    <input type="text" name="tags" placeholder="Tags">
+  </form>
+  <ul class="timestamps">
+    <li>Created: <time>{{noteCtrl.note.created_at}}</time></li>
+    <li>Updated: <time>{{noteCtrl.note.updated_at}}</time></li>
+  </ul>
+</section>
+<section class="note-title">
+  <h2>{{noteCtrl.note.title}}</h2>
+</section>
+<section class="note-body">
+  {{noteCtrl.note.content}}
+</section>

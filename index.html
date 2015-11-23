@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Noterrific</title>
+    <link rel="stylesheet" href="css/meyer-reset.css" />
+    <link rel="stylesheet" href="css/note-style.css" />
+    <script src="dist/noterrific.js"></script>
+  </head>
+  <body ng-app="noterrific">
+    <header>
+      <span class="logo">Noterrific</span>
+      <form class="search-bar">
+        <input type="text" name="search-term">
+        <input type="submit">
+      </form>
+    </header>
+    <main class="cf main-container" ng-controller="notesController as notesCtrl">
+    <aside class="note-list">
+      <button class="new-note">Add Note</button>
+      <ul>
+        <li ng-repeat="note in notesCtrl.notes">
+          <a ng-href="#/notes/{{note.id}}">{{note.title}}</a>
+        </li>
+      </ul>
+    </aside>
+    <article class="editor" ng-view>
+    </article>
+    </main>
+  </body>
+</html>
