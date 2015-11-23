@@ -19,7 +19,7 @@
     <aside class="note-list">
       <button class="new-note" ng-click="notesCtrl.newNote()">Add Note</button>
       <ul>
-        <li ng-repeat="note in notesCtrl.notes | orderBy:'-updated_at' | filter:search">
+        <li ng-repeat="note in notesCtrl.notes | orderBy:'-id' | filter:search">
           <a ng-href="#/notes/{{note.id}}">{{note.title}}</a>
         </li>
       </ul>

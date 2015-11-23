@@ -11,5 +11,5 @@
   <h2><input type="text" placeholder="Title Goes Here" ng-model="noteCtrl.note.title"></h2>
 </section>
 <section class="note-body">
-  <textarea ng-model="noteCtrl.note.content" ng-change="noteCtrl.update()" ng-model-options="{ debounce: 2000 }"></textarea>
+  <textarea ng-model="noteCtrl.note.content" ng-change="noteCtrl.update(noteCtrl.note.id)" ng-model-options="{ debounce: 2000 }"></textarea>
 </section>

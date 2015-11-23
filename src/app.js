@@ -1,4 +1,4 @@
 (function() {
-  angular.module("noterrific", ["ngRoute"]);
+  angular.module("noterrific", ["ngRoute", "LocalStorageModule"]);
 })()
 
