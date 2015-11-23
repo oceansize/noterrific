@@ -1295,15 +1295,35 @@ function ngViewFillContentFactory($compile, $controller, $route) {
         templateUrl: "partials/note.html",
         controller: "individualNoteController",
         controllerAs: "noteCtrl"
-      })
+      }).
+      when("/welcome", {
+        templateUrl: "partials/welcome.html"
+      }).
+      otherwise({
+        redirectTo: "/welcome"
+      });
     }
   ]);
 })()
 ;(function(){
-  angular.module("noterrific").controller("individualNoteController", ["$routeParams", function($routeParams){
+  angular.module("noterrific").controller("individualNoteController", ["$routeParams", "notesFactory", function($routeParams, Notes){
     var self = this;
 
-    self.notes = [
+    self.noteId = $routeParams.noteId;
+    self.note = Notes.find(self.noteId);
+  }])
+})()
+
+;(function(){
+  angular.module("noterrific").controller("notesController", ["notesFactory", function(Notes){
+    var self = this;
+
+    self.notes = Notes.allNotes;
+  }])
+})()
+;(function(){
+  angular.module("noterrific").factory("notesFactory", [function(){
+    var notes = [
       {id: 1, title: "Directives in AngularJS", content: "Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
       {id: 2, title: "Using curl", content: "Using cUrl is easy, just do it", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
       {id: 3, title: "Params Explained", content: "params are things that go in the url", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
@@ -1312,21 +1332,15 @@ function ngViewFillContentFactory($compile, $controller, $route) {
       {id: 6, title: "Params Explained. Again.", content: "Surely you know how to do it", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"}
     ];
 
-    self.noteId = $routeParams.noteId;
-    self.note = self.notes.filter(function(note) { return note.id == self.noteId })[0];
-  }])
-})()
-;(function(){
-  angular.module("noterrific").controller("notesController", [function(){
-    var self = this;
+    var find = function(id) {
+      return notes.filter(function(note) { 
+        return note.id == id;
+      })[0]
+    };
 
-    self.notes = [
-      {id: 1, title: "Directives in AngularJS", content: "", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
-      {id: 2, title: "Using curl", content: "", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
-      {id: 3, title: "Params Explained", content: "", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
-      {id: 4, title: "Markdown for GitHub with an excessively long title because people lack the ability to be concise whilst using written communication", content: "", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
-      {id: 5, title: "Using HTTParty", content: "", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"},
-      {id: 6, title: "Params Explained. Again.", content: "", tags: [], created_at: "29 October 2015", updated_at: "30 October 2015"}
-    ];
+    return {
+      allNotes: notes,
+      find: find
+    };
   }])
 })()
