@@ -17,9 +17,15 @@
 
     var create = function() {
       var newId =  maxId() + 1;
-      var note = {id: newId, title: "Untitled Note", content: "", tags: [], created_at: "", updated_at: ""}
-      notes.push(note)
-      return note
+      var timestamp = new Date;
+      var note = {id: newId,
+                  title: "Untitled Note",
+                  content: "",
+                  tags: [],
+                  created_at: timestamp,
+                  updated_at: timestamp};
+      notes.push(note);
+      return note;
     }
 
     var maxId = function() {

@@ -3,8 +3,8 @@
     <input type="text" name="tags" placeholder="Tags">
   </form>
   <ul class="timestamps">
-    <li>Created: <time>{{noteCtrl.note.created_at}}</time></li>
-    <li>Updated: <time>{{noteCtrl.note.updated_at}}</time></li>
+    <li>Created: <time>{{noteCtrl.note.created_at | date:'short'}}</time></li>
+    <li>Updated: <time>{{noteCtrl.note.updated_at | date:'short'}}</time></li>
   </ul>
 </section>
 <section class="note-title">
