@@ -81,6 +81,19 @@ ul.timestamps li {
   font-weight: bold;
 }
 
+textarea, input[type="text"] {
+  outline: none;
+  resize: none;
+  overflow: auto;
+  border: none;
+  font-size: 1em;
+}
+
+.editor textarea, .editor input[type="text"] {
+  background: none;
+  width: 100%;
+}
+
 .cf:before,
 .cf:after {
       content: " "; /* 1 */

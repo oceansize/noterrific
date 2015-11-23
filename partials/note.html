@@ -8,8 +8,8 @@
   </ul>
 </section>
 <section class="note-title">
-  <h2>{{noteCtrl.note.title}}</h2>
+  <h2><input type="text" placeholder="Title Goes Here" ng-model="noteCtrl.note.title"></h2>
 </section>
 <section class="note-body">
-  {{noteCtrl.note.content}}
+  <textarea ng-model="noteCtrl.note.content"></textarea>
 </section>
