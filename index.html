@@ -11,7 +11,7 @@
     <header>
       <span class="logo">Noterrific</span>
       <form class="search-bar">
-        <input type="text" name="search-term">
+        <input type="text" name="search-term" ng-model="search">
         <input type="submit">
       </form>
     </header>
@@ -19,7 +19,7 @@
     <aside class="note-list">
       <button class="new-note">Add Note</button>
       <ul>
-        <li ng-repeat="note in notesCtrl.notes">
+        <li ng-repeat="note in notesCtrl.notes | filter:search">
           <a ng-href="#/notes/{{note.id}}">{{note.title}}</a>
         </li>
       </ul>
