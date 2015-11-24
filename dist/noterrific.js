@@ -1768,18 +1768,24 @@ angularLocalStorage.provider('localStorageService', function() {
 })()
 
 ;(function(){
-  angular.module("noterrific").controller("notesController", ["notesFactory", "$location", function(Notes, $location){
+  angular.module("noterrific").controller("notesController", ["$routeParams", "notesFactory", "$location", function($routeParams, Notes, $location){
     var self = this;
 
     self.timestamp = function(note) {
-       return Date.parse(note.updated_at);
+      return Date.parse(note.updated_at);
     };
     self.notes = Notes.allNotes;
     self.newNote = function() {
       $location.path("/notes/new");
     };
+    self.delete = function(note) {
+      Notes.delete(note);
+      if($routeParams.noteId == note.id.toString()) {
+        $location.path("/notes/new");
+      }
+    };
   }])
-})()
+  })()
 ;(function(){
   angular.module("noterrific").factory("notesFactory", ["localStorageService", function(LocalStorage){
     var notes = (LocalStorage.get("notes") || []);
@@ -1794,7 +1800,7 @@ angularLocalStorage.provider('localStorageService', function() {
       var newId =  maxId() + 1;
       var timestamp = new Date;
       var note = { id: newId,
-                   title: "Untitled Note" + newId,
+                   title: "Untitled Note",
                    content: "",
                    tags: [],
                    created_at: timestamp,
@@ -1815,13 +1821,20 @@ angularLocalStorage.provider('localStorageService', function() {
       var updatedTimestamp = new Date;
       notes[index].updated_at = updatedTimestamp;
       LocalStorage.set("notes", notes);
+    }
+
+    var deleteNote = function(note) {
+      var noteToDelete = notes.indexOf(note);
+      notes.splice(noteToDelete, 1);
+      LocalStorage.set("notes", notes);
     };
 
     return {
       allNotes: notes,
       find: find,
       create: create,
-      update: update
+      update: update,
+      delete: deleteNote
     };
   }])
 })()

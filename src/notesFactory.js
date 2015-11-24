@@ -12,7 +12,7 @@
       var newId =  maxId() + 1;
       var timestamp = new Date;
       var note = { id: newId,
-                   title: "Untitled Note" + newId,
+                   title: "Untitled Note",
                    content: "",
                    tags: [],
                    created_at: timestamp,
@@ -33,13 +33,20 @@
       var updatedTimestamp = new Date;
       notes[index].updated_at = updatedTimestamp;
       LocalStorage.set("notes", notes);
+    }
+
+    var deleteNote = function(note) {
+      var noteToDelete = notes.indexOf(note);
+      notes.splice(noteToDelete, 1);
+      LocalStorage.set("notes", notes);
     };
 
     return {
       allNotes: notes,
       find: find,
       create: create,
-      update: update
+      update: update,
+      delete: deleteNote
     };
   }])
 })()
