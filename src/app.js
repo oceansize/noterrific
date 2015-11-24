@@ -1,4 +1,4 @@
 (function() {
-  angular.module("noterrific", ["ngRoute", "LocalStorageModule"]);
+  angular.module("noterrific", ["ngRoute", "LocalStorageModule", "ngTagsInput"]);
 })()
 

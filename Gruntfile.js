@@ -12,6 +12,7 @@ module.exports = function(grunt) {
       dist: {
         src: ['node_modules/angular/angular.min.js',
               'node_modules/angular-route/angular-route.js',
+              'node_modules/ng-tags-input/build/ng-tags-input.js',
               'node_modules/angular-local-storage/dist/angular-local-storage.js',
               'src/**/*.js'],
         dest: 'dist/<%= pkg.name %>.js'
