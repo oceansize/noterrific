@@ -3,7 +3,7 @@
     var notes = (LocalStorage.get("notes") || []);
 
     var find = function(id) {
-      return notes.filter(function(note) { 
+      return notes.filter(function(note) {
         return note.id == id;
       })[0]
     };
@@ -11,12 +11,12 @@
     var create = function() {
       var newId =  maxId() + 1;
       var timestamp = new Date;
-      var note = {id: newId,
-                  title: "Untitled Note" + newId,
-                  content: "",
-                  tags: [],
-                  created_at: new Date,
-                  updated_at: new Date};
+      var note = { id: newId,
+                   title: "Untitled Note" + newId,
+                   content: "",
+                   tags: [],
+                   created_at: timestamp,
+                   updated_at: timestamp };
       notes.push(note);
       LocalStorage.set("notes", notes)
       return note;
@@ -30,7 +30,8 @@
 
     var update = function(note) {
       var index = notes.indexOf(note)
-      notes[index].id = notes[index].id + 100;
+      var updatedTimestamp = new Date;
+      notes[index].updated_at = updatedTimestamp;
       LocalStorage.set("notes", notes);
     };
 
