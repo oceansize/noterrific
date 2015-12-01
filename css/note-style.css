@@ -94,6 +94,10 @@ textarea, input[type="text"] {
   width: 100%;
 }
 
+.editor textarea {
+  height: 100vh;
+}
+
 .cf:before,
 .cf:after {
       content: " "; /* 1 */
